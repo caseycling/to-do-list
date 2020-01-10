@@ -3,8 +3,9 @@ import TodoItem from './TodoItem';
 
 class Todos extends Component {
   render() {
+    console.log(this.props)
     return this.props.todos.map(todo => (
-      <TodoItem />
+      <TodoItem todo={todo}/>
     ))
   }
 }
