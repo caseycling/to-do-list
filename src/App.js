@@ -10,23 +10,7 @@ import './App.css';
 
 class App extends Component {
   state = {
-    todos: [
-      {
-        id: uuid.v4(),
-        title: 'Master React.js',
-        completed: false
-      },
-      {
-        id: uuid.v4(),
-        title: 'Clean bathroom',
-        completed: false
-      },
-      {
-        id: uuid.v4(),
-        title: 'Get grocceries',
-        completed: false
-      }
-    ]
+    todos: [ ]
   }
 
   markComplete = (id) => {
