@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import Todos from './Components/Todos'
+import Todos from './Components/Todos';
+import Header from './Components/Header';
+import AddTodo from './Components/AddTodo';
 
 import './App.css';
 
 class App extends Component {
   state = {
-    todos: [ 
+    todos: [
       {
         id: 1,
         title: 'Master React.js',
@@ -25,24 +27,40 @@ class App extends Component {
   }
 
   markComplete = (id) => {
-    this.setState({ todos: this.state.todos.map(todo => {
-      if(todo.id === id) {
-        todo.completed = !todo.completed
-      }
-      return todo;
-    })})
+    this.setState({
+      todos: this.state.todos.map(todo => {
+        if (todo.id === id) {
+          todo.completed = !todo.completed
+        }
+        return todo;
+      })
+    })
   }
 
   delTodo = (id) => {
-    this.setState({ todos: [...this.state.todos.filter(
-      todo =>  todo.id !== id
-      )]})
+    this.setState({
+      todos: [...this.state.todos.filter(
+        todo => todo.id !== id
+      )]
+    })
+  }
+
+  generateContent = (content) => {
+    return content
   }
 
   render() {
     return (
       <div className="App">
-        <Todos todos={this.state.todos} markComplete={this.markComplete} delTodo={this.delTodo}/>
+        <div className="container">
+          <Header />
+          <AddTodo />
+          <Todos 
+            todos={this.state.todos} 
+            markComplete={this.markComplete} 
+            delTodo={this.delTodo}
+          />
+        </div>
       </div>
     );
   }

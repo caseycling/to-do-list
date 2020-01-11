@@ -1,7 +1,6 @@
 import React from 'react';
 
-function Header(props) {
-    console.log(props)
+function Header() {
     return (
         <header style={headerStyle}>
             <h1 >Header</h1>
