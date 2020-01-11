@@ -4,13 +4,20 @@ import Header from './Components/Header';
 import AddTodo from './Components/AddTodo';
 import About from './Components/pages/About';
 import { BrowserRouter as Router, Route } from 'react-router-dom'
-import uuid from 'uuid';
+// import uuid from 'uuid';
+import axios from 'axios';
 
 import './App.css';
 
+
 class App extends Component {
   state = {
-    todos: [ ]
+    todos: []
+  }
+
+  componentDidMount() {
+    axios.get('https://jsonplaceholder.typicode.com/todos?_limit=10')
+      .then(res => this.setState({ todos: res.data }))
   }
 
   markComplete = (id) => {
@@ -25,20 +32,21 @@ class App extends Component {
   }
 
   delTodo = (id) => {
-    this.setState({
-      todos: [...this.state.todos.filter(
-        todo => todo.id !== id
-      )]
-    })
+
+    axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`)
+      .then(res => this.setState({
+        todos: [...this.state.todos.filter(
+          todo => todo.id !== id)]
+      }))
   }
 
   addTodo = (title) => {
-    const newTodo = {
-      id: uuid.v4(),
-      title: title,
+    axios.post('https://jsonplaceholder.typicode.com/todos', {
+      title,
       completed: false
-    }
-    this.setState({ todos: [...this.state.todos, newTodo] })
+    })
+      .then(res => this.setState({ todos: [...this.state.todos, res.data] }))
+
   }
 
   // generateContent = (content) => {
